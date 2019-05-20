@@ -1,0 +1,97 @@
+<template>
+    <section class="container">
+        <div class="container--outer">
+            <div class="container--inner">
+                <form @submit.prevent="onSubmit">
+                    <transition name="fade" mode="out-in">
+                        <div class="container--form--login" v-if="loginForm" key="login">
+                            <h1 class="title">
+                                Login
+                            </h1>
+                            <br>
+                            <b-form-group>
+                                <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+                                <br>
+                                <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+                            </b-form-group>
+                        </div>
+                        <div class="container--form--register" v-else key="register">
+                            <h1 class="title">
+                                Register
+                            </h1>
+                            <br>
+                            <b-form-group>
+                                <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+                                <br>
+                                <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+                            </b-form-group>
+                        </div>
+                    </transition>
+                </form>
+                <div class="switch-container">
+                    <b-button @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
+                    <div class="switch-container--inner">
+                        <label class="switch"><input type="checkbox" id="togBtn" v-model="loginForm"><div class="slider round"></div></label>
+                        &nbsp;
+                        <p>{{loginForm ? 'Not registered?' : 'Have a account?' }}</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+    export default {
+        name:'AdminAuthPage',
+        layout:'admin',
+        data(){
+            return {
+                email:'',
+                password:'',
+                loginForm:true
+            }
+        },
+        methods:{
+            onSubmit(){
+            this.$store.dispatch('authenticateUser',{
+                isLogin:this.loginForm,
+                email:this.email,
+                password:this.password
+            })
+            .then(()=>{
+                this.$router.push('/main')
+            })
+            }
+        }   
+    }
+</script>
+
+<style scoped>
+    .container {
+        margin: 0 auto;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .title {
+        font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+            'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        display: block;
+        font-weight: 300;
+        font-size: 100px;
+        color: #35495e;
+        letter-spacing: 1px;
+    }
+
+    .switch-container{
+        display:flex;
+        justify-content: space-between;
+    }
+    .switch-container--inner{
+        display:flex;
+    }
+</style>
