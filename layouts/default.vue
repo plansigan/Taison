@@ -11,7 +11,7 @@
       </b-navbar-nav>
 
       <b-navbar-nav class="ml-auto">
-        <b-nav-item @click="logout" to="/admin/auth">Log-out</b-nav-item>
+        <b-nav-item @click="logout">Log-out</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -27,7 +27,9 @@
   export default {
     methods:{
       logout(){
-        this.$store.dispatch('logout')
+        this.$store.dispatch('logout').then(()=>{
+          this.$router.go('/admin/auth')
+        })
       }
     } 
   }

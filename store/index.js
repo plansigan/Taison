@@ -61,7 +61,7 @@ const createStore = () => {
                 }
 
                 return this.$axios
-                        .$post(`${process.env.baseURL}/products.json`,createdProduct)
+                        .$post(`${process.env.baseURL}/products.json?auth=${vuexContext.state.token}`,createdProduct)
                         .then(data=>{
                             vuexContext.commit('addProduct',{...createdProduct,id:data.name})
                         })
@@ -69,7 +69,7 @@ const createStore = () => {
             },
             editProduct(vuexContext,editedProduct){
                 return this.$axios
-                        .$put(`${process.env.baseURL}/products/${editedProduct.id}.json`,editedProduct)
+                        .$put(`${process.env.baseURL}/products/${editedProduct.id}.json?auth=${vuexContext.state.token}`,editedProduct)
                         .then(data=>{
                             vuexContext.commit('editProduct',editedProduct)
                         })
@@ -99,7 +99,7 @@ const createStore = () => {
                 return {status:200}
             },
             deleteProduct(vuexContext,id){
-                return this.$axios.$delete(`${process.env.baseURL}/products/${id}.json`)
+                return this.$axios.$delete(`${process.env.baseURL}/products/${id}.json?auth=${vuexContext.state.token}`)
                     .then(()=>{
                         vuexContext.commit('deleteProduct',id)
                     })
@@ -160,12 +160,14 @@ const createStore = () => {
             logout(vuexContext){
                 vuexContext.commit('clearToken');
                 Cookie.remove('jwt');
-                Cookie.remote('expirationDate');
+                Cookie.remove('expirationDate');
 
                 if(process.client){
                     localStorage.removeItem('token');
-                    localStorage.remoteItem('tokenExpiration');
+                    localStorage.removeItem('tokenExpiration');
                 }
+
+                return true
                 
             }
         },
