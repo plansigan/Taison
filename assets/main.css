@@ -11,6 +11,17 @@
 }
 
 
+/* link default */
+.noFormatLink,.noFormatLink:hover{
+  text-decoration:none;
+  color:black;
+}
+
+i {
+  font-size:2.5rem;
+}
+
+
 
 
 /* SWITCH */

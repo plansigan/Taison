@@ -29,11 +29,15 @@
                     </transition>
                 </form>
                 <div class="switch-container">
-                    <b-button @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
+                    <div class="switch-container--inne--button">
+                        <b-button @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
+                        <a href="#" class="noFormatLink" @click="authenticateFacebook" v-show="!loginForm"><i class="icofont-facebook"></i></a>
+                    </div>
                     <div class="switch-container--inner">
                         <label class="switch"><input type="checkbox" id="togBtn" v-model="loginForm"><div class="slider round"></div></label>
                         &nbsp;
                         <p>{{loginForm ? 'Not registered?' : 'Have a account?' }}</p>
+                        
                     </div>
                     
                 </div>
@@ -54,6 +58,12 @@
             }
         },
         methods:{
+            authenticateFacebook(){
+                this.$store.dispatch('authenticateFacebook')
+                    .then(()=>{
+                        // this.$router.go('/main')
+                    })
+            },
             onSubmit(){
             this.$store.dispatch('authenticateUser',{
                 isLogin:this.loginForm,
@@ -92,6 +102,10 @@
         justify-content: space-between;
     }
     .switch-container--inner{
+        display:flex;
+    }
+
+    .switch-container--inne--button{
         display:flex;
     }
 </style>
