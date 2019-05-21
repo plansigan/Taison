@@ -65,6 +65,7 @@ import { setTimeout } from 'timers';
                 this.$store.dispatch('authenticateFacebook')
                     .then(()=>{
                         this.$router.push('/main')
+                        this.$router.push('/main')
                     })
             },
             onSubmit(){
@@ -74,6 +75,7 @@ import { setTimeout } from 'timers';
                 password:this.password
             })
             .then(()=>{
+                this.$router.push('/main')
                 this.$router.push('/main')
             })
             }
