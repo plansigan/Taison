@@ -134,7 +134,8 @@ const createStore = () => {
 
                 return firebase.auth().signInWithPopup(provider).then(function(result) {
                     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-                    var token = result.credential.accessToken;
+                    var token = result.user._lat
+                    // console.log(result)
 
                     //store the token to state.token
                             vuexContext.commit('setToken',token);
@@ -142,8 +143,8 @@ const createStore = () => {
                             localStorage.setItem('tokenExpiration',new Date().getTime()  + Number.parseInt(3600) * 1000);
                             Cookie.set('jwt',token)
                             Cookie.set('expirationDate', new Date().getTime()  + Number.parseInt(3600) * 1000)
-                    // The signed-in user info.
-                    var user = result.user;
+
+                            return true
                     
                     // ...
                   }).catch(function(error) {
@@ -157,6 +158,8 @@ const createStore = () => {
                     var credential = error.credential;
                     // ...
                   });
+
+                  
             },
             initAuth(vuexContext,req){
                 let token;

@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
     export default {
         name:'AdminAuthPage',
         layout:'admin',
@@ -61,7 +62,7 @@
             authenticateFacebook(){
                 this.$store.dispatch('authenticateFacebook')
                     .then(()=>{
-                        // this.$router.go('/main')
+                        this.$router.push('/main')
                     })
             },
             onSubmit(){
