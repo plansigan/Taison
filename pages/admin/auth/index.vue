@@ -2,7 +2,7 @@
     <section class="container-section">
         <div class="container--outer">
             <div class="container--inner">
-                <form @submit.prevent="onSubmit">
+                <b-form @submit.prevent="onSubmit">
                     <transition name="fade" mode="out-in">
                         <div class="container--form--login" v-if="loginForm" key="login">
                             <h1 class="title">
@@ -10,9 +10,10 @@
                             </h1>
                             <br>
                             <b-form-group>
-                                <b-form-input @keydown.enter="onSubmit" type="email" v-model="email" placeholder="Email"></b-form-input>
-                                <br>
-                                <b-form-input @keydown.enter="onSubmit" type="password" v-model="password" placeholder="Password"></b-form-input>
+                                <b-form-input  type="email" v-model="email" placeholder="Email" required></b-form-input>
+                            </b-form-group>
+                            <b-form-group>
+                                <b-form-input  type="password" v-model="password" placeholder="Password" required></b-form-input>
                             </b-form-group>
                         </div>
                         <div class="container--form--register" v-else key="register">
@@ -21,16 +22,16 @@
                             </h1>
                             <br>
                             <b-form-group>
-                                <b-form-input @keydown.enter="onSubmit" type="email" v-model="email" placeholder="Email"></b-form-input>
-                                <br>
-                                <b-form-input @keydown.enter="onSubmit" type="password" v-model="password" placeholder="Password"></b-form-input>
+                                <b-form-input  type="email" v-model="email" placeholder="Email" required></b-form-input>
+                            </b-form-group>
+                            <b-form-group>
+                                <b-form-input  type="password" v-model="password" placeholder="Password" required></b-form-input>
                             </b-form-group>
                         </div>
                     </transition>
-                </form>
-                <div class="switch-container">
+                    <div class="switch-container">
                     <div class="switch-container--inne--button">
-                        <b-button class="login-btn" @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
+                        <b-button class="login-btn" type="submit">{{loginForm ? 'Login' : 'Register'}}</b-button>
                         <a href="#" class="noFormatLink" @click="authenticateFacebook"><i class="icofont-facebook"></i></a>
                     </div>
                     <div class="switch-container--inner">
@@ -41,6 +42,7 @@
                     </div>
                     
                 </div>
+                </b-form>
             </div>
         </div>
     </section>
