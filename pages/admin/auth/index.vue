@@ -1,5 +1,5 @@
 <template>
-    <section class="container">
+    <section class="container-section">
         <div class="container--outer">
             <div class="container--inner">
                 <form @submit.prevent="onSubmit">
@@ -30,8 +30,8 @@
                 </form>
                 <div class="switch-container">
                     <div class="switch-container--inne--button">
-                        <b-button @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
-                        <a href="#" class="noFormatLink" @click="authenticateFacebook" v-show="!loginForm"><i class="icofont-facebook"></i></a>
+                        <b-button class="login-btn" @click="onSubmit" type="button">{{loginForm ? 'Login' : 'Register'}}</b-button>
+                        <a href="#" class="noFormatLink" @click="authenticateFacebook"><i class="icofont-facebook"></i></a>
                     </div>
                     <div class="switch-container--inner">
                         <label class="switch"><input type="checkbox" id="togBtn" v-model="loginForm"><div class="slider round"></div></label>
@@ -80,7 +80,7 @@ import { setTimeout } from 'timers';
 </script>
 
 <style scoped>
-    .container {
+    .container-section {
         margin: 0 auto;
         min-height: 100vh;
         display: flex;
@@ -96,6 +96,27 @@ import { setTimeout } from 'timers';
         font-size: 100px;
         color: #35495e;
         letter-spacing: 1px;
+    }
+
+    @media only screen and (max-width: 400px) {
+        .title {
+            font-size:50px;
+        }
+        .switch-container{
+            flex-direction: columnn;
+        }
+
+        .container--inner {
+            width:300px !important;
+        }
+        .login-btn{
+            height:40px;
+        }
+    }
+
+
+    .container--inner {
+        width:400px;
     }
 
     .switch-container{

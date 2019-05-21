@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-table striped hover :items="loadedProducts" :fields="fields">
+        <b-table responsive outlined striped hover :items="loadedProducts" :fields="fields">
 
             <template slot="image" slot-scope="data">
                 <b-img-lazy width="100%" thumbnail fluid :src="`https://firebasestorage.googleapis.com/v0/b/taison-exam.appspot.com/o/image_folder%2F${data.item.image}?alt=media`" :alt="data.item.image"></b-img-lazy>
