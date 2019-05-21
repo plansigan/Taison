@@ -10,9 +10,9 @@
                             </h1>
                             <br>
                             <b-form-group>
-                                <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+                                <b-form-input @keydown.enter="onSubmit" type="email" v-model="email" placeholder="Email"></b-form-input>
                                 <br>
-                                <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+                                <b-form-input @keydown.enter="onSubmit" type="password" v-model="password" placeholder="Password"></b-form-input>
                             </b-form-group>
                         </div>
                         <div class="container--form--register" v-else key="register">
@@ -21,9 +21,9 @@
                             </h1>
                             <br>
                             <b-form-group>
-                                <b-form-input type="email" v-model="email" placeholder="Email"></b-form-input>
+                                <b-form-input @keydown.enter="onSubmit" type="email" v-model="email" placeholder="Email"></b-form-input>
                                 <br>
-                                <b-form-input type="password" v-model="password" placeholder="Password"></b-form-input>
+                                <b-form-input @keydown.enter="onSubmit" type="password" v-model="password" placeholder="Password"></b-form-input>
                             </b-form-group>
                         </div>
                     </transition>
