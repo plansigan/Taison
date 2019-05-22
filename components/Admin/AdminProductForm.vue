@@ -10,7 +10,7 @@
         </b-input-group>
         <br>
         <b-input-group>
-            <b-form-file v-model="image" class="mt-3" accept=".jpg, .png, .gif"></b-form-file>
+            <b-form-file v-model="image" class="mt-3" accept="image/x-png,image/gif,image/jpeg"></b-form-file>
         </b-input-group>
         <p class="mt-2">Uploaded file: <b>{{ typeof image == 'object' ? imageUploaded ? image.name :'click upload to upload selected file' : image }}</b></p>
         <br>
@@ -75,9 +75,9 @@
                         const id = length + 1;
                         const found = arr.some(el => el.digitCode === value && el.name === name);
                         if (!found) {
-                            return true
-                        } else {
                             return false
+                        } else {
+                            return true
                         } 
                     } else {
                         const { length } = arr;
@@ -116,11 +116,24 @@
                 this.$router.push('/main')
             },
             uploadImage(){
+
+                function isFileImage(file) {
+                    const acceptedImageTypes = ['image/jpeg'];
+                
+                    return file && acceptedImageTypes.includes(file['type'])
+                }
+
+                console.log(isFileImage(this.image))
+
                 if(this.image !== null) {
-                    this.$store.dispatch('uploadImage',this.image)
-                    .then(()=>{
-                        this.imageUploaded = true
-                    })
+                    if(isFileImage(this.image)) {
+                        this.$store.dispatch('uploadImage',this.image)
+                            .then(()=>{
+                                this.imageUploaded = true
+                            })
+                    } else {
+                        alert("please upload a '.jpeg' only image")
+                    }
                 } 
             }
         }
